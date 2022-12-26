@@ -153,6 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   progressMode: 2
+  startDateTime:
+    _dateTime: 22.11.1988 00:00:00
 --- !u!4 &512361316
 Transform:
   m_ObjectHideFlags: 0

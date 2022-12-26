@@ -21,16 +21,12 @@ namespace DateTimeManager
         public static event DateTimeEvent OnYearPass;
 
         [SerializeField] ProgressMode progressMode = ProgressMode.Hour;
-        DateTime startDateTime = new DateTime(1996, 11, 3, 9, 30, 0);
+        [SerializeField] UDateTime startDateTime;
         DateTime currentDateTime;
         DateTime dateTimeInPreviousFrame;
 
         float speedModifier = 1f;
         float timeElapsedSinceTimeProgress = Mathf.Infinity;
-        int currentHour;
-        int currentDay;
-        int currentMonth;
-        int currentYear;
         bool stopped;
 
         const int DAYSTEP = 86400;
@@ -39,12 +35,7 @@ namespace DateTimeManager
 
         private void Start()
         {
-            currentDateTime = startDateTime;
-
-            currentHour = currentDateTime.Hour;
-            currentDay = currentDateTime.Day;
-            currentMonth = currentDateTime.Month;
-            currentYear= currentDateTime.Year;
+            currentDateTime = startDateTime.dateTime;
         }
 
         private void Update()
@@ -167,6 +158,11 @@ namespace DateTimeManager
         public void ResumeTime()
         {
             stopped = true;
+        }
+
+        public void SetStopped(bool stopped)
+        {
+            this.stopped = stopped;
         }
 
         public long GetUnixDateTime()
