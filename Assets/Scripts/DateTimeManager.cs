@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace DateTimeManager
+namespace TayfaGames.DateTimeManager
 {
     public enum ProgressMode
     {
@@ -40,7 +40,7 @@ namespace DateTimeManager
 
         private void Update()
         {
-            if (speedModifier == 0f || stopped || progressMode == ProgressMode.Manual) { return; }
+            if (speedModifier <= 0f || stopped || progressMode == ProgressMode.Manual) { return; }
 
             if (timeElapsedSinceTimeProgress > 1 / speedModifier)
             {
@@ -49,8 +49,6 @@ namespace DateTimeManager
             }
 
             timeElapsedSinceTimeProgress += Time.deltaTime;
-
-            Debug.Log(currentDateTime.ToString());
         }
 
         private void ProgressTime()
@@ -130,6 +128,11 @@ namespace DateTimeManager
             }
         }
 
+        public void SetProgressMode(ProgressMode progressMode)
+        {
+            this.progressMode = progressMode;
+        }
+
         public void SetSpeedModifier(float speedModifier)
         {
             this.speedModifier = speedModifier;
@@ -145,9 +148,19 @@ namespace DateTimeManager
             speedModifier += 1;
         }
 
+        public void IncreaseSpeedModifier(float amount)
+        {
+            speedModifier += amount;
+        }
+
         public void DecreaseSpeedModifier()
         {
             speedModifier -= 1;
+        }
+
+        public void DecreaseSpeedModifier(float amount)
+        {
+            speedModifier -= amount;
         }
 
         public void StopTime()
@@ -158,6 +171,11 @@ namespace DateTimeManager
         public void ResumeTime()
         {
             stopped = true;
+        }
+
+        public bool GetStopped()
+        {
+            return stopped;
         }
 
         public void SetStopped(bool stopped)
@@ -173,6 +191,11 @@ namespace DateTimeManager
         public string GetFormattedDateTime(string format)
         {
             return currentDateTime.ToString(format);
+        }
+
+        public DateTime GetDateTime()
+        {
+            return currentDateTime;
         }
     }
 }
