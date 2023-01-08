@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TayfaGames.DateTimeManager;
+using System;
 
 public class DemoUI : MonoBehaviour
 {
@@ -15,6 +16,24 @@ public class DemoUI : MonoBehaviour
     Button hourProgressButton;
     Button dayProgressButton;
 
+    private void OnEnable()
+    {
+        DateTimeManager.OnMinutePass += HandleMinutePass;
+        DateTimeManager.OnHourPass += HandleHourPass;
+        DateTimeManager.OnDayPass += HandleDayPass;
+        DateTimeManager.OnMonthPass += HandleMonthPass;
+        DateTimeManager.OnYearPass += HandleYearPass;
+    }
+
+    private void OnDisable()
+    {
+        DateTimeManager.OnMinutePass -= HandleMinutePass;
+        DateTimeManager.OnHourPass -= HandleHourPass;
+        DateTimeManager.OnDayPass -= HandleDayPass;
+        DateTimeManager.OnMonthPass -= HandleMonthPass;
+        DateTimeManager.OnYearPass -= HandleYearPass;
+    }
+
     private void Start()
     {
         dateTimeManager = FindObjectOfType<DateTimeManager>();
@@ -27,11 +46,20 @@ public class DemoUI : MonoBehaviour
         minuteProgressButton = canvas.transform.Find("Minute Progress Button").GetComponent<Button>();
         hourProgressButton = canvas.transform.Find("Hour Progress Button").GetComponent<Button>();
         dayProgressButton = canvas.transform.Find("Day Progress Button").GetComponent<Button>();
+
+        slowDownButton.onClick.AddListener(SlowDown);
+        speedUpButton.onClick.AddListener(SpeedUp);
+        stopResumeButton.onClick.AddListener(ResumeStop);
+        minuteProgressButton.onClick.AddListener(MinuteProgress);
+        hourProgressButton.onClick.AddListener(HourProgress);
+        dayProgressButton.onClick.AddListener(DayProgress);
     }
 
     private void Update()
     {
-        dateTimeText.text = dateTimeManager.GetFormattedDateTime("dd/MM/yyyy") + "\n" + dateTimeManager.GetFormattedDateTime("HH:mm");
+        dateTimeText.text = dateTimeManager.GetFormattedDateTime("dd/MM/yyyy");
+        dateTimeText.text += "\n" + dateTimeManager.GetFormattedDateTime("HH:mm");
+        dateTimeText.text += "\n" + dateTimeManager.GetSpeedModifier().ToString() + "x";
     }
 
     private void SlowDown()
@@ -49,12 +77,12 @@ public class DemoUI : MonoBehaviour
         if (dateTimeManager.GetStopped())
         {
             dateTimeManager.StopTime();
-            stopResumeButton.transform.Find("Text").GetComponent<Text>().text = "Resume";
+            stopResumeButton.transform.Find("Text").GetComponent<Text>().text = "Stop";
         }
         else
         {
             dateTimeManager.ResumeTime();
-            stopResumeButton.transform.Find("Text").GetComponent<Text>().text = "Stop";
+            stopResumeButton.transform.Find("Text").GetComponent<Text>().text = "Resume";
         }
     }
 
@@ -71,5 +99,30 @@ public class DemoUI : MonoBehaviour
     private void DayProgress()
     {
         dateTimeManager.SetProgressMode(ProgressMode.Day);
+    }
+
+    private void HandleMinutePass(DateTime dateTime)
+    {
+        Debug.Log(dateTime.ToString() + "- Minute passed event");
+    }
+
+    private void HandleHourPass(DateTime dateTime)
+    {
+        Debug.Log(dateTime.ToString() + "- Hour passed event");
+    }
+
+    private void HandleDayPass(DateTime dateTime)
+    {
+        Debug.Log(dateTime.ToString() + "- Day passed event");
+    }
+
+    private void HandleMonthPass(DateTime dateTime)
+    {
+        Debug.Log(dateTime.ToString() + "- Month passed event");
+    }
+
+    private void HandleYearPass(DateTime dateTime)
+    {
+        Debug.Log(dateTime.ToString() + "- Year passed event");
     }
 }

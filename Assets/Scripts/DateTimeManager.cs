@@ -35,6 +35,7 @@ namespace TayfaGames.DateTimeManager
 
         private void Start()
         {
+            dateTimeInPreviousFrame = startDateTime.dateTime;
             currentDateTime = startDateTime.dateTime;
         }
 
