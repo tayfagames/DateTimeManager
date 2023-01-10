@@ -1618,7 +1618,9 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: '01/01/0001
 
-    00:00'
+    00:00
+
+    1x'
 --- !u!222 &1912597590
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -166,12 +166,12 @@ namespace TayfaGames.DateTimeManager
 
         public void StopTime()
         {
-            stopped = false;
+            stopped = true;
         }
 
         public void ResumeTime()
         {
-            stopped = true;
+            stopped = false;
         }
 
         public bool GetStopped()

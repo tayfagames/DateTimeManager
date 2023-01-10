@@ -76,12 +76,12 @@ public class DemoUI : MonoBehaviour
     {
         if (dateTimeManager.GetStopped())
         {
-            dateTimeManager.StopTime();
+            dateTimeManager.ResumeTime();
             stopResumeButton.transform.Find("Text").GetComponent<Text>().text = "Stop";
         }
         else
         {
-            dateTimeManager.ResumeTime();
+            dateTimeManager.StopTime();
             stopResumeButton.transform.Find("Text").GetComponent<Text>().text = "Resume";
         }
     }
