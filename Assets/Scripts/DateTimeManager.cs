@@ -22,6 +22,8 @@ namespace TayfaGames.DateTimeManager
 
         [SerializeField] ProgressMode progressMode = ProgressMode.Hour;
         [SerializeField] UDateTime startDateTime;
+        [SerializeField] bool startOnAwake = true;
+        
         DateTime currentDateTime;
         DateTime dateTimeInPreviousFrame;
 
@@ -35,6 +37,7 @@ namespace TayfaGames.DateTimeManager
 
         private void Start()
         {
+            stopped = !startOnAwake;
             dateTimeInPreviousFrame = startDateTime.dateTime;
             currentDateTime = startDateTime.dateTime;
         }
