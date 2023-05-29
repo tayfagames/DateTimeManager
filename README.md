@@ -15,7 +15,7 @@ Create a new empty object and add DateTimeManager component to it.
 
 ![Component setup](https://i.imgur.com/pAbKxIO.png)
 
-Manager requires two parameters to work, `Progress Mode` and `Start Date`. For progress mode there 4 are choices: `Minute`, `Hour`, `Day` and `Manual`. 
+Manager requires three parameters to work, `Progress Mode`, `Start Date` and `Start On Awake`. For progress mode there 4 are choices: `Minute`, `Hour`, `Day` and `Manual`. 
 
 When the manager is in `Manual` mode you need to progress time manually through code with `ProgressTime` function like this:
 
@@ -30,9 +30,51 @@ public enum ProgressMode
 
 dateTimeManager.ProgressTime(ProgressMode.Day);
 ```
----
+
+Alternatively you can progress to certain `DateTime` like this:
+
+```csharp
+DateTime newDate = new DateTime(2023, 05, 29, 22, 27, 00);
+dateTimeManager.ProgressTime(newDate);
+```
+
+While this way progresses time to a date, most of the events will not trigger depending on the new date.
 
 For `Start Date` DateTimeManager uses a specific string format for expressing DateTime which is `DD.MM.YYYY HH:MM:SS`
+
+If `Start On Awake` is true, DateTimeManager will start time progression when the object is starts running.
+
+---
+
+DateTimeManager's default speed modifier is 1. You can speed up or slow down time progression with modifying the speed modifier. You can also stop time progression with setting the speed modifier to zero.
+
+```csharp
+// Increasing speed
+dateTimeManager.IncreaseSpeedModifier(); // Increases speed modifier by 1
+dateTimeManager.IncreaseSpeedModifier(2f); // Increases speed modifier by 2
+
+// Decreasing speed
+dateTimeManager.DecreaseSpeedModifier(); // Decreases speed modifier by 1
+dateTimeManager.DecreaseSpeedModifier(2f); // Decreases speed modifier by 2
+```
+
+Note: Speed modifier can't be negative.
+
+---
+
+You can stop and resume time progression like this:
+
+```csharp
+# Resume
+dateTimeManager.ResumeTime();
+
+# Stop
+dateTimeManager.ResumeTime();
+```
+
+---
+
+DateTimeManager throws triggers based on time progression. An important note is DateTimeManager triggers the minimum `ProgressMode` events. For example if `ProgressMode` is `Hour`, `Minute` events will not trigger. Additionally to `ProgressMode` triggers, DateTimeManager has events for month and year progression events. 
 
 ```csharp
 using TayfaGames.DateTimeManager;
@@ -92,3 +134,7 @@ public class Demo : MonoBehaviour
     }
 }
 ```
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
