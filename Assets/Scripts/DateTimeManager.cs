@@ -93,6 +93,15 @@ namespace TayfaGames.DateTimeManager
             dateTimeInPreviousFrame = currentDateTime;
         }
 
+        public void ProgressTime(DateTime nextDateTime)
+        {
+            if (nextDateTime < currentDateTime) { return; }
+
+            currentDateTime = nextDateTime;
+            HandleEvents(ProgressMode.Manual);
+            dateTimeInPreviousFrame = currentDateTime;
+        }
+
         private void HandleEvents(ProgressMode progressMode)
         {
             if (progressMode == ProgressMode.Day)
@@ -200,6 +209,11 @@ namespace TayfaGames.DateTimeManager
         public DateTime GetDateTime()
         {
             return currentDateTime;
+        }
+
+        public void SetDateTime(DateTime currentDateTime)
+        {
+            this.currentDateTime = currentDateTime;
         }
     }
 }
