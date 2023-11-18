@@ -54,9 +54,9 @@ public class DemoUI : MonoBehaviour
         hourProgressButton.onClick.AddListener(HourProgress);
         dayProgressButton.onClick.AddListener(DayProgress);
 
-        dateTimeManager.QueueJob(() => HappyBirthday("Enis"), dateTimeManager.GetUnixDateTime() + 86400 * 3);
-        dateTimeManager.QueueJob(() => HappyBirthday("Canberk"), dateTimeManager.GetUnixDateTime() + 86400 * 6);
-        dateTimeManager.QueueJob(() => HappyBirthday("Oguzhan"), dateTimeManager.GetUnixDateTime() + 86400 * 4);
+        dateTimeManager.QueueJob(() => HappyBirthday("Enis"), dateTimeManager.GetUnixDateTime() + dateTimeManager.Timedelta(days: 3));
+        dateTimeManager.QueueJob(() => HappyBirthday("Canberk"), dateTimeManager.GetUnixDateTime() + dateTimeManager.Timedelta(days: 6));
+        dateTimeManager.QueueJob(() => HappyBirthday("Oguzhan"), dateTimeManager.GetUnixDateTime() + dateTimeManager.Timedelta(days: 4));
     }
 
     private void Update()

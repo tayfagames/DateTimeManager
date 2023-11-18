@@ -33,6 +33,7 @@ namespace TayfaGames
         float timeElapsedSinceTimeProgress = Mathf.Infinity;
         bool stopped;
 
+        const int WEEKSTEP = 604800;
         const int DAYSTEP = 86400;
         const int HOURSTEP = 3600;
         const int MINUTESTEP = 60;
@@ -226,6 +227,11 @@ namespace TayfaGames
             if (timestamp < GetUnixDateTime()) { return; }
 
             jobQueue.QueueJob(function, timestamp);
+        }
+
+        public long Timedelta(int weeks = 0, int days = 0, int hours = 0, int minutes = 0)
+        {
+            return (long) weeks * WEEKSTEP + days * DAYSTEP + hours * HOURSTEP + minutes * MINUTESTEP;
         }
     }
 }
