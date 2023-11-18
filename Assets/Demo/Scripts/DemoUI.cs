@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TayfaGames.DateTimeManager;
+using TayfaGames;
 using System;
 
 public class DemoUI : MonoBehaviour
@@ -53,6 +53,10 @@ public class DemoUI : MonoBehaviour
         minuteProgressButton.onClick.AddListener(MinuteProgress);
         hourProgressButton.onClick.AddListener(HourProgress);
         dayProgressButton.onClick.AddListener(DayProgress);
+
+        dateTimeManager.QueueJob(() => HappyBirthday("Enis"), dateTimeManager.GetUnixDateTime() + 86400 * 3);
+        dateTimeManager.QueueJob(() => HappyBirthday("Canberk"), dateTimeManager.GetUnixDateTime() + 86400 * 6);
+        dateTimeManager.QueueJob(() => HappyBirthday("Oguzhan"), dateTimeManager.GetUnixDateTime() + 86400 * 4);
     }
 
     private void Update()
@@ -124,5 +128,10 @@ public class DemoUI : MonoBehaviour
     private void HandleYearPass(DateTime dateTime)
     {
         Debug.Log(dateTime.ToString() + "- Year passed event");
+    }
+
+    public void HappyBirthday(string name)
+    {
+        Debug.Log("Happy Birthday " + name + "!");
     }
 }

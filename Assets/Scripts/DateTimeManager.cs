@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace TayfaGames.DateTimeManager
+namespace TayfaGames
 {
     public enum ProgressMode
     {
@@ -14,6 +14,7 @@ namespace TayfaGames.DateTimeManager
     public class DateTimeManager : MonoBehaviour
     {
         public delegate void DateTimeEvent(DateTime dateTime);
+        public static event DateTimeEvent TimeProgressEvent;
         public static event DateTimeEvent OnMinutePass;
         public static event DateTimeEvent OnHourPass;
         public static event DateTimeEvent OnDayPass;
@@ -26,6 +27,7 @@ namespace TayfaGames.DateTimeManager
         
         DateTime currentDateTime;
         DateTime dateTimeInPreviousFrame;
+        JobQueue jobQueue;
 
         float speedModifier = 1f;
         float timeElapsedSinceTimeProgress = Mathf.Infinity;
@@ -37,6 +39,7 @@ namespace TayfaGames.DateTimeManager
 
         private void Start()
         {
+            jobQueue = GetComponent<JobQueue>();
             stopped = !startOnAwake;
             dateTimeInPreviousFrame = startDateTime.dateTime;
             currentDateTime = startDateTime.dateTime;
@@ -104,6 +107,8 @@ namespace TayfaGames.DateTimeManager
 
         private void HandleEvents(ProgressMode progressMode)
         {
+            TimeProgressEvent?.Invoke(currentDateTime);
+
             if (progressMode == ProgressMode.Day)
             {
                 OnDayPass?.Invoke(currentDateTime);
@@ -214,6 +219,13 @@ namespace TayfaGames.DateTimeManager
         public void SetDateTime(DateTime currentDateTime)
         {
             this.currentDateTime = currentDateTime;
+        }
+
+        public void QueueJob(Action function, long timestamp)
+        {
+            if (timestamp < GetUnixDateTime()) { return; }
+
+            jobQueue.QueueJob(function, timestamp);
         }
     }
 }
