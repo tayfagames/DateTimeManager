@@ -14,6 +14,11 @@ namespace TayfaGames
             DateTimeManager.TimeProgressEvent += HandleTimeProgress;
         }
 
+        private void OnDisable()
+        {
+            DateTimeManager.TimeProgressEvent -= HandleTimeProgress;
+        }
+
         private void HandleTimeProgress(DateTime dateTime)
         {
             for (int i = 0; i < jobTimestamps.Count; i++)
