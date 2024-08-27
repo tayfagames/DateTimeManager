@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using UnityEngine;
 
 namespace TayfaGames
@@ -22,9 +23,10 @@ namespace TayfaGames
         public static event DateTimeEvent OnYearPass;
 
         [SerializeField] ProgressMode progressMode = ProgressMode.Hour;
-        [SerializeField] UDateTime startDateTime;
+        [SerializeField] string startDateTime;
         [SerializeField] bool startOnAwake = true;
-        
+
+        DateTime startDateTimeObject;
         DateTime currentDateTime;
         DateTime dateTimeInPreviousFrame;
         JobQueue jobQueue;
@@ -40,10 +42,11 @@ namespace TayfaGames
 
         private void Start()
         {
+            startDateTimeObject = DateTime.ParseExact(startDateTime, "MM.dd.yyyy HH:mm:ss", CultureInfo.InvariantCulture);
             jobQueue = GetComponent<JobQueue>();
             stopped = !startOnAwake;
-            dateTimeInPreviousFrame = startDateTime.dateTime;
-            currentDateTime = startDateTime.dateTime;
+            dateTimeInPreviousFrame = startDateTimeObject;
+            currentDateTime = startDateTimeObject;
         }
 
         private void Update()
