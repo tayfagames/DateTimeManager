@@ -66,7 +66,7 @@ public class DatePickerWindow : EditorWindow
         GUILayout.BeginHorizontal();
         for (int i = 0; i < startDay; i++)
         {
-            GUILayout.Label("", GUILayout.Width(40));
+            GUILayout.Button("", GUILayout.Width(40));
         }
 
         for (int day = 1; day <= daysInMonth; day++)
