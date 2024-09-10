@@ -32,21 +32,39 @@ public class DatePickerWindow : EditorWindow
         GUILayout.Label($"{selectedDate:MMMM yyyy}", EditorStyles.boldLabel);
 
         GUILayout.BeginHorizontal();
-        if (GUILayout.Button("<12x"))
+        if (GUILayout.Button("<1y", GUILayout.Width(75)))
         {
             selectedDate = selectedDate.AddMonths(-12);
         }
-        if (GUILayout.Button("<")) 
+        if (GUILayout.Button("<1m", GUILayout.Width(75))) 
         {
             selectedDate = selectedDate.AddMonths(-1);
         }
-        if (GUILayout.Button(">")) 
+        if (GUILayout.Button("1m>", GUILayout.Width(75))) 
         {
             selectedDate = selectedDate.AddMonths(1);
         }
-        if (GUILayout.Button(">12x"))
+        if (GUILayout.Button("1y>", GUILayout.Width(75)))
         {
             selectedDate = selectedDate.AddMonths(12);
+        }
+        GUILayout.EndHorizontal();
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Button("<100y", GUILayout.Width(75)))
+        {
+            selectedDate = selectedDate.AddMonths(-1200);
+        }
+        if (GUILayout.Button("<10y", GUILayout.Width(75)))
+        {
+            selectedDate = selectedDate.AddMonths(-120);
+        }
+        if (GUILayout.Button("10y>", GUILayout.Width(75)))
+        {
+            selectedDate = selectedDate.AddMonths(120);
+        }
+        if (GUILayout.Button("100y>", GUILayout.Width(75)))
+        {
+            selectedDate = selectedDate.AddMonths(1200);
         }
         GUILayout.EndHorizontal();
 
