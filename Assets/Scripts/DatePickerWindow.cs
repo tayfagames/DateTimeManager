@@ -20,7 +20,7 @@ public class DatePickerWindow : EditorWindow
         window.minSize = new Vector2(300, 300);
         window.onDateSelected = onDateSelected;
         window.ShowPopup();
-        lastDateTime = DateTime.ParseExact(dateTimeString, "MM.dd.yyyy HH:mm:ss", CultureInfo.InvariantCulture); ;
+        lastDateTime = DateTime.ParseExact(dateTimeString, "MM/dd/yyyy HH:mm:ss", CultureInfo.InvariantCulture); ;
         selectedDate = lastDateTime;
         hour = lastDateTime.Hour;
         minute = lastDateTime.Minute;

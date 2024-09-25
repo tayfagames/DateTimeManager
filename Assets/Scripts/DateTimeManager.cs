@@ -42,7 +42,7 @@ namespace TayfaGames
 
         private void Start()
         {
-            startDateTimeObject = DateTime.ParseExact(startDateTime, "MM.dd.yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+            startDateTimeObject = DateTime.ParseExact(startDateTime, "MM/dd/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
             jobQueue = GetComponent<JobQueue>();
             stopped = !startOnAwake;
             dateTimeInPreviousFrame = startDateTimeObject;
