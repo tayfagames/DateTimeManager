@@ -39,5 +39,31 @@ namespace TayfaGames
             jobTimestamps.Add(timestamp);
             jobs.Add(function);
         }
+
+        public void ClearQueue()
+        {
+            jobs.Clear();
+            jobTimestamps.Clear();
+        }
+
+        public void AddJobsToQueue(List<Tuple<Action, long>> jobsToAdd)
+        {
+            for (int i = 0; i < jobsToAdd.Count; i++)
+            {
+                jobs.Add(jobsToAdd[i].Item1);
+                jobTimestamps.Add(jobsToAdd[i].Item2);
+            }
+        }
+
+        public List<Tuple<Action, long>> GetJobs()
+        {
+            List<Tuple<Action, long>> result = new List<Tuple<Action, long>>();
+            for (int i = 0; i < jobs.Count; i++)
+            {
+                result.Add(Tuple.Create(jobs[i], jobTimestamps[i]));
+            }
+
+            return result;
+        }
     }
 }
