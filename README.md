@@ -1,5 +1,5 @@
 # DateTimeManager
-[![Unity 2021.3+](https://img.shields.io/badge/unity-2021.3.13+-blue)](https://unity3d.com/get-unity/download)
+[![Unity 2021.3+](https://img.shields.io/badge/unity-2021.3.43+-blue)](https://unity3d.com/get-unity/download)
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://github.com/tayfagames/DateTimeManager/blob/master/LICENSE)
 
 
