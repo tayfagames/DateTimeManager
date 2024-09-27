@@ -7,13 +7,13 @@ A Unity asset for managing date and time (like Football Manager, Mount &amp; Bla
 
 ## Installation
 
-Copy the repo to your project folder and you're good to go!
+Simply import the .unitypackage file in the [Releases](https://github.com/tayfagames/datetimemanager/releases/) page to your project.
 
 ## Getting Started
 
-Create a new empty object and add DateTimeManager component to it.
+Create a new empty object and add DateTimeManager and JobQueue components to it. Or you can use the prefab in the prefabs folder.
 
-![Component setup](https://i.imgur.com/pAbKxIO.png)
+![Component setup](https://i.imgur.com/6dCa02c.png)
 
 Manager requires three parameters to work, `Progress Mode`, `Start Date` and `Start On Awake`. For progress mode there 4 are choices: `Minute`, `Hour`, `Day` and `Manual`. 
 
@@ -69,7 +69,7 @@ You can stop and resume time progression like this:
 dateTimeManager.ResumeTime();
 
 # Stop
-dateTimeManager.ResumeTime();
+dateTimeManager.StopTime();
 ```
 
 ---
@@ -133,6 +133,22 @@ public class Demo : MonoBehaviour
         Debug.Log(dateTime.ToString() + " - Year passed event");
     }
 }
+```
+
+## Job Queue
+
+You can also register functions to queue to execute on certain time.
+
+```csharp
+// Function to register
+public void GrowPlant()
+{
+    growthStage += 1;
+}
+
+// Register function to the queue
+// GrowPlant function will execute after an hour passes in game
+dateTimeManager.QueueJob(GrowPlant,currentDateTime + dateTimeManager.Timedelta(hours: 1));
 ```
 
 ## License
