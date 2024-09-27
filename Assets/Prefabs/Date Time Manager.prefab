@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7835951344689506952}
   - component: {fileID: 7835951344689506959}
+  - component: {fileID: -8228197907704455725}
   m_Layer: 0
   m_Name: Date Time Manager
   m_TagString: Untagged
@@ -45,6 +46,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   progressMode: 2
-  startDateTime:
-    _dateTime: 3.11.1996 00:00:00
+  startDateTime: 
   startOnAwake: 0
+--- !u!114 &-8228197907704455725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7835951344689506958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ee9ac08f6d73c1498f3810abe35421a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

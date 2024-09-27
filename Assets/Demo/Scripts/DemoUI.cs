@@ -134,4 +134,16 @@ public class DemoUI : MonoBehaviour
     {
         Debug.Log("Happy Birthday " + name + "!");
     }
+
+    public void RegisterJob()
+    {
+        long currentDateTime = dateTimeManager.GetUnixDateTime();
+        
+        dateTimeManager.QueueJob(PrintConsole, currentDateTime + dateTimeManager.Timedelta(hours: 1));
+    }
+
+    public void PrintConsole()
+    {
+        Debug.Log("This is an example of job queue");
+    }
 }
